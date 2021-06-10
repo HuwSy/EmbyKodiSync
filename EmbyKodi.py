@@ -92,8 +92,8 @@ for key in e:
   if p[key] > 0:
     played = '1'
   try:
-    print('insert or ignore into userdatas values (' + str(e[key]) + ',1,0,' + played + ',' + str(p[key]) + ',0,0,0,0,0,0,0);')
-    curE.execute('insert or ignore into userdatas values (' + str(e[key]) + ',1,0,' + played + ',' + str(p[key]) + ',0,' + str(d[key]) + ',0,0,0,0,0);')
+    print('insert or ignore into userdatas values (' + str(e[key]) + ',1,0,' + played + ',' + str(p[key]) + ',0,' + str(d[key]).split('.')[0] + ',0,0,0);')
+    curE.execute('insert or ignore into userdatas (UserDataKeyId,userId,rating,played,playCount,isFavorite,playbackPositionTicks,LastPlayedDateInt,RatingLastModified,PlaystateLastModified) values (' + str(e[key]) + ',1,0,' + played + ',' + str(p[key]) + ',0,' + str(d[key]).split('.')[0] + ',0,0,0);')
     conE.commit()
   finally:
     print('update userdatas set played = ' + played + ', playcount = ' + str(p[key]) + ' where userdatakeyid = ' + str(e[key]) + ';')
